@@ -46,6 +46,7 @@ double GetExpenseAmount(string question, double minValue);
 void AddExpense(double expenseAmount);
 void AddExpense(double expenseAmount, double maxAmount);
 void ShowExpenses(double expectedTotal, double expectedReimbursement, double expectedAllowed);
+void ShowExpenses();
 
 // Prototypes for Expenses
 void AddFlightExpense();
