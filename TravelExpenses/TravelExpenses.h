@@ -5,8 +5,8 @@
 
 using namespace std;
 
-const int EXPENSE_SIZE = 3;
-const int TIME_SIZE = 2;
+const int EXPENSE_SIZE = 3;		// Length of the _expenses array
+const int TIME_SIZE = 2;		// Length of time arrays
 const int TOTAL_EXPENSES = 0;   // Index of _expenses for total expenses amount
 const int REIMBURSEMENT = 1;    // Index of _expenses for reimbursement amount
 const int TOTAL_ALLOWED = 2;    // Index of _expenses for total allowed amount
@@ -25,10 +25,6 @@ const double MAX_HOTEL_FEE_PER_NIGHT = 90.00;
 const double MAX_BREAKFAST_COST = 9.00;
 const double MAX_LUNCH_COST = 12.00;
 const double MAX_DINNER_COST = 16.00;
-
-const string BREAKFAST = "breakfast";
-const string LUNCH = "lunch";
-const string DINNER = "dinner";
 
 // Prototypes for Time
 void GetTime(string question, int* time);
