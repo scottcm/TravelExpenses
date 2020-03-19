@@ -16,7 +16,6 @@ void AddMealExpenses(int tripLength)
     double maxBreakfast;
     double maxLunch;
     double maxDinner;
-    double total = 0, reimburse = 0, allowed = 0;
     
     for (int days = 1; days <= tripLength; days++)
     {
@@ -39,7 +38,6 @@ void AddMealExpenses(int tripLength)
                 maxLunch = MAX_LUNCH_COST;
                 maxDinner = MAX_DINNER_COST;
                 //Expense breakfast, lunch, and dinner
-                reimburse += breakfast_fee + lunch_fee + dinner_fee;
             }
             else if (IsBeforeDepartureTime(FIRST_DAY_LUNCH_TIME, TIME_SIZE))
             {
@@ -47,14 +45,12 @@ void AddMealExpenses(int tripLength)
                 maxDinner = MAX_DINNER_COST;
                 //Check the departure time before Noon
                 //Expense lunch, and dinner
-                reimburse += lunch_fee + dinner_fee;
             }
             else if (IsBeforeDepartureTime(FIRST_DAY_DINNER_TIME, TIME_SIZE))
             {
                 maxDinner = MAX_DINNER_COST;
                 //Check the departure time before 6pm
                 //Expense dinner
-                reimburse += dinner_fee;
             }
         }
         else if (days == tripLength)
@@ -66,20 +62,17 @@ void AddMealExpenses(int tripLength)
                 maxLunch = MAX_LUNCH_COST;
                 maxDinner = MAX_DINNER_COST;
                 //Expense breakfast, lunch, and dinner
-                reimburse += breakfast_fee + lunch_fee + dinner_fee;
             }
             else if (IsAfterArrivalTime(LAST_DAY_LUNCH_TIME, TIME_SIZE))
             {
                 maxBreakfast = MAX_BREAKFAST_COST;
                 maxLunch = MAX_LUNCH_COST;
                 //Expense breakfast, and lunch
-                reimburse += breakfast_fee + lunch_fee;
             }
             else if (IsAfterArrivalTime(LAST_DAY_BREAKFAST_TIME, TIME_SIZE))
             {
                 maxBreakfast = MAX_BREAKFAST_COST;
                 //Expense breakfast
-                reimburse += breakfast_fee;
             }
         }
         else
@@ -87,15 +80,11 @@ void AddMealExpenses(int tripLength)
             maxBreakfast = MAX_BREAKFAST_COST;
             maxLunch = MAX_LUNCH_COST;
             maxDinner = MAX_DINNER_COST;
-            reimburse += breakfast_fee + lunch_fee + dinner_fee;
         }
         AddExpense(breakfast_fee, maxBreakfast);
         AddExpense(lunch_fee, maxLunch);
         AddExpense(dinner_fee, maxDinner);
-        total += breakfast_fee + lunch_fee + dinner_fee;
-        allowed += maxBreakfast + maxLunch + maxDinner;
     }
-    ShowExpenses(total, reimburse, allowed);
 }
 
 
