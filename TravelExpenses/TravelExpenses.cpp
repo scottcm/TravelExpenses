@@ -103,6 +103,12 @@ int main()
     DisplayExpenseReport(tripLength);
 }
 
+//Display Report
+void DisplayExpenseReport(int tripLength)
+{
+    cout << "FUNCTION: DisplayExpenseReport - " << "tripLength = " << tripLength << endl;
+}
+
 // Adds expense to total, reimbursement, and total allowed
 void AddExpense(double expenseAmount)
 {

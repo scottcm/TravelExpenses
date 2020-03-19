@@ -49,6 +49,7 @@ int GetLengthOfTrip();
 double GetExpenseAmount(string question, double minValue);
 void AddExpense(double expenseAmount);
 void AddExpense(double expenseAmount, double maxAmount);
+void ShowExpenses(double expectedTotal, double expectedReimbursement, double expectedAllowed);
 
 // Prototypes for Expenses
 void AddFlightExpense();
@@ -59,5 +60,4 @@ void AddTaxiFees(int tripLength, double maxPerDay);
 void AddConferenceFee();
 void AddHotelExpense(int tripLength, double maxPerNight);
 void AddMealExpenses(int tripLength);
-void GetMealExpense(string meal, int* time);
 void DisplayExpenseReport(int lengthOfTrip);
