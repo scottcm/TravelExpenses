@@ -38,6 +38,8 @@ bool IsValidHour(int);
 bool IsValidMinute(int);
 bool IsBeforeDepartureTime(int time[], int size);
 bool IsAfterArrivalTime(int time[], int size);
+void SetArrivalTime(int hour, int minute);
+void SetDepartureTime(int hour, int minute)
 string ToTimeString(int time[], int size);
 
 // Prototypes for Helper functions

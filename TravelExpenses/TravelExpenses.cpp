@@ -179,6 +179,18 @@ void ShowExpenses(double expectedTotal, double expectedReimbursement, double exp
         " : " << ((_expenses[TOTAL_ALLOWED] == expectedAllowed) ? "PASS" : "FAIL") << endl << endl;;
 }
 
+void SetArrivalTime(int hour, int minute)
+{
+    _arrivalTime[HOURS] = hour;
+    _arrivalTime[MINUTES] = minute;
+}
+
+void SetDepartureTime(int hour, int minute)
+{
+    _departureTime[HOURS] = hour;
+    _departureTime[MINUTES] = minute;
+}
+
 // Code for testing time functionality
 void TestTime()
 {
