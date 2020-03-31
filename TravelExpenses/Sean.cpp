@@ -16,6 +16,15 @@ void AddParkingFees(int tripLength, double maxPerDay)
 {
     cout << "FUNCTION: AddParkingFees - " << "tripLength = " << tripLength << endl <<
         "maxPerDay = " << maxPerDay << endl;
+    double dailyFee;
+  //ask for fee per day, from day 1 to tripLength.
+    for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
+    {
+        //Take amount and add to expenses.
+        dailyFee = GetExpenseAmount("What was the parking fee for today?", 0);
+        AddExpense(dailyFee, maxPerDay);
+    }
+
 }
 void AddTaxiFees(int tripLength, double maxPerDay)
 {
@@ -39,6 +48,7 @@ void TestSeanParts()
     //AddCarRentalExpense();
     //AddMileageExpense(double mileageRate);
     //AddParkingFees(int days, double maxPerDay);
+    AddParkingFees(int days, double maxPerDay);
     //AddTaxiFees(int days, double maxPerDay);
     //AddConferenceFee();
     //AddHotelExpense(int days, double maxPerNight);
