@@ -70,6 +70,12 @@ int main()
         AddCarRentalExpense();
     }
 
+    //Add taxi expenses
+    if (AskYesNo("Did you use a taxi?"))
+    {
+        AddTaxiFees(tripLength, MAX_TAXI_FEE_PER_DAY);
+    }
+
     // Add flight expense
     if (AskYesNo("Did you take a flight?"))
     {
