@@ -10,7 +10,7 @@ void AddCarRentalExpense()
 }
 void AddMileageExpense(double mileageRate)
 {
-    cout << "FUNCTION: AddMileageExpense - " << "mileageRate = " << mileageRate << endl;
+    cout << "FUN   CTION: AddMileageExpense - " << "mileageRate = " << mileageRate << endl;
 }
 void AddParkingFees(int tripLength, double maxPerDay)
 {
