@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BetterApproach.cpp" />
     <ClCompile Include="Nghia.cpp" />
     <ClCompile Include="Scott.cpp" />
     <ClCompile Include="Sean.cpp" />

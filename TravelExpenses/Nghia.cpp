@@ -1,89 +1,67 @@
 #include "TravelExpenses.h"
-
-// Pseudo-Constants
-int FIRST_DAY_BREAKFAST_TIME[TIME_SIZE]{ 7, 0 };    // 7am
-int FIRST_DAY_LUNCH_TIME[TIME_SIZE]{ 12,0 };        // Noon
-int FIRST_DAY_DINNER_TIME[TIME_SIZE]{ 18,0 };       // 6pm
-int LAST_DAY_BREAKFAST_TIME[TIME_SIZE]{ 8,0 };      // 8am
-int LAST_DAY_LUNCH_TIME[TIME_SIZE]{ 13,0 };         // 1pm
-int LAST_DAY_DINNER_TIME[TIME_SIZE]{ 19,0 };        // 7pm
+#include <iomanip>
 
 void AddMealExpenses(int tripLength)
 {
     double breakfast_fee;
     double lunch_fee;
     double dinner_fee;
-    double maxBreakfast;
-    double maxLunch;
-    double maxDinner;
     
     for (int days = 1; days <= tripLength; days++)
     {
         cout << "Please enter the amount you spent on meals for day " << days << endl;
-        breakfast_fee = GetExpenseAmount("How much did you pay for breakfast? ", 0);
-        lunch_fee = GetExpenseAmount("How much did you pay for lunch? ", 0);
-        dinner_fee = GetExpenseAmount("How much did you pay for dinner? ", 0);
+        if (AllowMealExpense(BREAKFAST_MEAL, days))
+        {
+            breakfast_fee = GetExpenseAmount("How much did you pay for breakfast? ", 0);
+            AddExpense(breakfast_fee, MAX_BREAKFAST_COST);
+        }
+        if (AllowMealExpense(LUNCH_MEAL, days))
+        {
+            lunch_fee = GetExpenseAmount("How much did you pay for lunch? ", 0);
+            AddExpense(lunch_fee, MAX_LUNCH_COST);
+        }
+        if (AllowMealExpense(DINNER_MEAL, days))
+        {
+            dinner_fee = GetExpenseAmount("How much did you pay for dinner? ", 0);
+            AddExpense(dinner_fee, MAX_DINNER_COST);
+        }
         cout << endl;
+    }
+}
 
-        maxBreakfast = 0;
-        maxLunch = 0;
-        maxDinner = 0;
+//Display Report
+void DisplayExpenseReport()
+{
+    cout << setprecision(2) << fixed;
+    cout << endl;
+    cout << "************************************************\n";
+    cout << "                 Expense Report                 \n";
+    cout << "------------------------------------------------\n";
+    cout << "TOTAL EXPENSES INCURRED: $" << GetTotalExpenses() << endl;
+    cout << "EXPENSES OVER ALLOWED  : $" << GetExcessExpenses() << endl;
+    cout << "MAX ALLOWED EXPENSES   : $" << GetTotalAllowed() << endl;
+    cout << endl;
 
-        if (days == 1)
+    // If expenses incurred is greater than reimbursable expenses then company is owed money
+    if (GetTotalExpenses() < GetTotalAllowed())
+    {
+        cout << "Thank you! You saved the company $" << (GetTotalAllowed() - GetTotalExpenses()) << endl;
+        if (GetExcessExpenses() > 0)
         {
-            //Check the departure time before 7am
-            if (IsBeforeDepartureTime(FIRST_DAY_BREAKFAST_TIME, TIME_SIZE))
-            {
-                maxBreakfast = MAX_BREAKFAST_COST;
-                maxLunch = MAX_LUNCH_COST;
-                maxDinner = MAX_DINNER_COST;
-                //Expense breakfast, lunch, and dinner
-            }
-            else if (IsBeforeDepartureTime(FIRST_DAY_LUNCH_TIME, TIME_SIZE))
-            {
-                maxLunch = MAX_LUNCH_COST;
-                maxDinner = MAX_DINNER_COST;
-                //Check the departure time before Noon
-                //Expense lunch, and dinner
-            }
-            else if (IsBeforeDepartureTime(FIRST_DAY_DINNER_TIME, TIME_SIZE))
-            {
-                maxDinner = MAX_DINNER_COST;
-                //Check the departure time before 6pm
-                //Expense dinner
-            }
+            cout << "Although you saved the company money, you exceeded a daily maximum expense amount.\n";
+            cout << "Some expenses have a maximum allowable amount. Try to keep those expenses under the cap.\n";
         }
-        else if (days == tripLength)
-        {
-            //Check the arrival time after 7pm
-            if (IsAfterArrivalTime(LAST_DAY_DINNER_TIME,TIME_SIZE))
-            {
-                maxBreakfast = MAX_BREAKFAST_COST;
-                maxLunch = MAX_LUNCH_COST;
-                maxDinner = MAX_DINNER_COST;
-                //Expense breakfast, lunch, and dinner
-            }
-            else if (IsAfterArrivalTime(LAST_DAY_LUNCH_TIME, TIME_SIZE))
-            {
-                maxBreakfast = MAX_BREAKFAST_COST;
-                maxLunch = MAX_LUNCH_COST;
-                //Expense breakfast, and lunch
-            }
-            else if (IsAfterArrivalTime(LAST_DAY_BREAKFAST_TIME, TIME_SIZE))
-            {
-                maxBreakfast = MAX_BREAKFAST_COST;
-                //Expense breakfast
-            }
-        }
-        else
-        {
-            maxBreakfast = MAX_BREAKFAST_COST;
-            maxLunch = MAX_LUNCH_COST;
-            maxDinner = MAX_DINNER_COST;
-        }
-        AddExpense(breakfast_fee, maxBreakfast);
-        AddExpense(lunch_fee, maxLunch);
-        AddExpense(dinner_fee, maxDinner);
+    }
+    else if (GetTotalExpenses() > GetTotalAllowed())
+    {
+        // More was spent then is allowed
+        cout << "You exceeded the maximum allowable expenses.\n";
+        cout << "Try to be more careful about your expense amounts.\n";
+    }
+
+    if (GetExcessExpenses() > 0)
+    {
+        cout << "You need to reimburse the company $" << GetExcessExpenses();
     }
 }
 
@@ -96,6 +74,6 @@ void TestNghiaParts()
     SetDepartureTime(20, 0);
     AddMealExpenses(3);
     //GetMealExpense(string meal, int* time);
-    //DisplayExpenseReport(int lengthOfTrip);
+    //DisplayExpenseReport();
     ResetGlobalValues();
 }

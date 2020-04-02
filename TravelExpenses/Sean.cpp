@@ -89,6 +89,5 @@ void TestSeanParts()
     //AddTaxiFees(3, MAX_TAXI_FEE_PER_DAY);
     //AddConferenceFee();
     //AddHotelExpense(3, MAX_HOTEL_FEE_PER_NIGHT);
-    ShowExpenses();
     ResetGlobalValues();
 }
