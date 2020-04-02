@@ -7,7 +7,7 @@
 // Change any value to 1 to enable running the test code
 #define TEST_SCOTT_PARTS 0
 #define TEST_NGHIA_PARTS 0
-#define TEST_SEAM_PARTS 0
+#define TEST_SEAN_PARTS 0
 #define DO_NOT_RUN_APP 0
 
 // Prototypes for testing
@@ -77,7 +77,7 @@ int main()
     }
 
     // Add flight expense
-    if (AskYesNo("Did you take a flight?"))
+    if (AskYesNo("Did you take a round trip flight?"))
     {
         AddFlightExpense();
     }

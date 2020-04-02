@@ -2,41 +2,81 @@
 
 void AddFlightExpense()
 {
-    cout << "FUNCTION: AddFlightExpense - no input args\n";
+    double roundTripFare;
+    //Ask for the amount of round trip airfare.
+    //Take amount and add to expenses.
+    roundTripFare = GetExpenseAmount("What was the cost of the airfare?",0);
+    AddExpense(roundTripFare);
 }
 void AddCarRentalExpense()
 {
-    cout << "FUNCTION: AddCarRentalExpense - no input args\n";
+    double rentalCost;
+    //Ask for total amount of car rentals.
+    //Take total amount and add to expenses.
+    rentalCost = GetExpenseAmount("What was the total cost of car rentals?", 0);
+    AddExpense(rentalCost);
 }
-void AddMileageExpense(double mileageRate)
+void AddMileageExpense(double MILEAGE_RATE)
 {
-    cout << "FUN   CTION: AddMileageExpense - " << "mileageRate = " << mileageRate << endl;
+    double milesDriven;
+    double mileageCost;
+      //Ask for miles driven.
+    do
+    {
+        cout << "What was the total miles driven for the trip?\n";
+        cin >> milesDriven;
+        cin.ignore();
+        //Calculate cost with mileageRate.
+        mileageCost = milesDriven * MILEAGE_RATE;
+    } while (milesDriven < 0); 
+    //Add amount to expenses.
+    AddExpense(mileageCost);
 }
-void AddParkingFees(int tripLength, double maxPerDay)
+void AddParkingFees(int tripLength, double MAX_PARKING_FEE_PER_DAY)
 {
     double dailyFee;
   //ask for fee per day, from day 1 to tripLength.
     for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
     {
+        cout << "Please enter the amount you spent on parking fees for day " << dayNumber << endl;
         //Take amount and add to expenses.
         dailyFee = GetExpenseAmount("What was the parking fee for today?", 0);
-        AddExpense(dailyFee, maxPerDay);
+        AddExpense(dailyFee, MAX_PARKING_FEE_PER_DAY);
     }
 
 }
-void AddTaxiFees(int tripLength, double maxPerDay)
+void AddTaxiFees(int tripLength, double MAX_TAXI_FEE_PER_DAY)
 {
-    cout << "FUNCTION: AddTaxiFees - " << "tripLength = " << tripLength << endl <<
-        "maxPerDay = " << maxPerDay << endl;
+    double dailyFee;
+    //ask for fee per day, from day 1 to tripLength.
+    for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
+    {
+        cout << "Please enter the amount you spent on taxi fees for day " << dayNumber << endl;
+        //Take amount and add to expenses.
+        dailyFee = GetExpenseAmount("What was the taxi fee for today?", 0);
+        AddExpense(dailyFee, MAX_TAXI_FEE_PER_DAY);
+    }
 }
 void AddConferenceFee()
 {
-    cout << "FUNCTION: AddConferenceFee - no input args\n";
+    double conferenceCost;
+    //Ask for total amount of conference and seminar fees.
+    //Take total amount and add to expenses.
+    conferenceCost = GetExpenseAmount("What was the total cost of conference and seminar fees?", 0);
+    AddExpense(conferenceCost);
 }
-void AddHotelExpense(int tripLength, double maxPerNight)
+void AddHotelExpense(int tripLength, double MAX_HOTEL_FEE_PER_NIGHT)
 {
-    cout << "FUNCTION: AddHotelExpense - " << "tripLength = " << tripLength << endl <<
-        "maxPerNight = " << maxPerNight << endl;
+    double dailyHotel;
+    //ask for fee per day, from day 1 to tripLength.
+    for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
+    {
+        cout << "Please enter the amount you spent on hotels for day " << dayNumber << endl;
+        //Take amount and add to expenses.
+        dailyHotel = GetExpenseAmount("What was the hotel expense for today?", 0);
+        AddExpense(dailyHotel, MAX_HOTEL_FEE_PER_NIGHT);
+    }
+   
 }
 
 void TestSeanParts()
@@ -44,10 +84,11 @@ void TestSeanParts()
     ResetGlobalValues();
     //AddFlightExpense();
     //AddCarRentalExpense();
-    //AddMileageExpense(double mileageRate);
-    AddParkingFees(int days, double maxPerDay);
-    //AddTaxiFees(int days, double maxPerDay);
+    //AddMileageExpense(MILEAGE_RATE);
+    //AddParkingFees(3, MAX_PARKING_FEE_PER_DAY);
+    //AddTaxiFees(3, MAX_TAXI_FEE_PER_DAY);
     //AddConferenceFee();
-    //AddHotelExpense(int days, double maxPerNight);
+    //AddHotelExpense(3, MAX_HOTEL_FEE_PER_NIGHT);
+    ShowExpenses();
     ResetGlobalValues();
 }
