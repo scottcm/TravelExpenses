@@ -19,20 +19,22 @@ int GetLengthOfTrip()
 
 /********************* TIME FUNCTIONS **********************/
 // Returns true if MIN_HOUR <= hour < MAX_HOUR, otherwise false
+// - hour: The hour to evaluate
 bool IsValidHour(int hour)
 {
     return (hour >= MIN_HOUR && hour < MAX_HOUR);
 }
 
 // Returns true if MIN_MINUTE <= minute < MAX_MINUTE, otherwise false
+// - minute: The minute to evaluate
 bool IsValidMinute(int minute)
 {
     return (minute >= MIN_MINUTE && minute < MAX_MINUTE);
 }
 
 // Assigns user entered time to the time argument
-// string question: Text that is displayed to the user to ask for a time
-// int* time: a reference argument that is assigned a 2 element time array
+// - question: Text that is displayed to the user to ask for a time
+// - *time: a reference argument that is assigned a 2 element time array
 void GetTime(string question, int* time)
 {
     char separator;
@@ -49,47 +51,9 @@ void GetTime(string question, int* time)
     time[MINUTES] = minute;
 }
 
-// Returns true if time t1 is before time t2
-bool IsTimeBefore(int t1[], int t2[], int size)
-{
-    if (size != TIME_SIZE)
-    {
-        return false;
-    }
-
-    if (t1[HOURS] < t2[HOURS])
-    {
-        return true;
-    }
-    else if (t1[HOURS] == t2[HOURS])
-    {
-        return (t1[MINUTES] < t2[MINUTES]);
-    }
-
-    return false;
-}
-
-// Returns true if time t1 is after time t2, otherwise false
-bool IsTimeAfter(int t1[], int t2[], int size)
-{
-    if (size != TIME_SIZE)
-    {
-        return false;
-    }
-
-    if (t1[HOURS] > t2[HOURS])
-    {
-        return true;
-    }
-    else if (t1[HOURS] == t2[HOURS])
-    {
-        return (t1[MINUTES] > t2[MINUTES]);
-    }
-
-    return false;
-}
-
 // Returns a time array as a 24-hour clock string in format HH:MM
+// - time[]: The time to convert to a string
+// - size: The size of the time array. Must be of size TIME_SIZE or function returns empty string
 string ToTimeString(int time[], int size)
 {
     string timeString;
@@ -110,6 +74,7 @@ string ToTimeString(int time[], int size)
 /********************* HELPER FUNCTIONS **********************/
 // Returns true if the user enters Y to a Y/N question
 // Input is allowed to be upper or lowercase
+// - question: the yes/no question to ask the user
 bool AskYesNo(string question)
 {
     char response;
@@ -123,6 +88,7 @@ bool AskYesNo(string question)
 
         cin.ignore(); // Ignore enter at the end;
 
+        // convert the response to uppercase because answer is case-insensitive
         switch (_toupper(response))
         {
         case 'Y':
@@ -140,11 +106,13 @@ bool AskYesNo(string question)
 }
 
 // Returns the dollar amount of an expense
-// Outputs the question
-// Dollar amount inputted must >= minValue
+// - question: The question that asks the user for an amout
+// - minValue: The minimum amount allowed as input
 double GetExpenseAmount(string question, double minValue)
 {
     double cost;
+
+    // Ask the user for an amount until they provide a valid amount
     do
     {
         cout << question << " $";

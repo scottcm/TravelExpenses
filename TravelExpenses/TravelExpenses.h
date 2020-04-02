@@ -8,8 +8,8 @@ using namespace std;
 const int EXPENSE_SIZE = 3;		// Length of the _expenses array
 const int TIME_SIZE = 2;		// Length of time arrays
 const int TOTAL_EXPENSES = 0;   // Index of _expenses for total expenses amount
-const int REIMBURSEMENT = 1;    // Index of _expenses for reimbursement amount
-const int TOTAL_ALLOWED = 2;    // Index of _expenses for total allowed amount
+const int TOTAL_ALLOWED = 1;    // Index of _expenses for total allowed amount
+const int EXCESS_EXPENSE = 2;		// EXCESS_EXPENSE amount
 const int HOURS = 0;            // Index for hour in a time array
 const int MINUTES = 1;          // Index for minute in a time array
 const int MAX_HOUR = 24;
@@ -26,14 +26,22 @@ const double MAX_BREAKFAST_COST = 9.00;
 const double MAX_LUNCH_COST = 12.00;
 const double MAX_DINNER_COST = 16.00;
 
+const int FIRST_DAY_BREAKFAST_CUTOFF = 7;
+const int FIRST_DAY_LUNCH_CUTOFF = 12;
+const int FIRST_DAY_DINNER_CUTOFF = 18;
+const int LAST_DAY_BREAKFAST_CUTOFF = 8;
+const int LAST_DAY_LUNCH_CUTOFF = 13;
+const int LAST_DAY_DINNER_CUTOFF = 19;
+
+const int BREAKFAST_MEAL = 0;		// ID for breakfast
+const int LUNCH_MEAL = 1;			// ID for lunch
+const int DINNER_MEAL = 2;			// ID for dinner
+
+
 // Prototypes for Time
 void GetTime(string question, int* time);
-bool IsTimeBefore(int t1[], int t2[], int size);
-bool IsTimeAfter(int t1[], int t2[], int size);
 bool IsValidHour(int);
 bool IsValidMinute(int);
-bool IsBeforeDepartureTime(int time[], int size);
-bool IsAfterArrivalTime(int time[], int size);
 void SetArrivalTime(int hour, int minute);
 void SetDepartureTime(int hour, int minute);
 string ToTimeString(int time[], int size);
@@ -45,8 +53,10 @@ int GetLengthOfTrip();
 double GetExpenseAmount(string question, double minValue);
 void AddExpense(double expenseAmount);
 void AddExpense(double expenseAmount, double maxAmount);
-void ShowExpenses(double expectedTotal, double expectedReimbursement, double expectedAllowed);
-void ShowExpenses();
+double GetTotalExpenses();
+double GetTotalAllowed();
+double GetExcessExpenses();
+bool AllowMealExpense(int meal, int tripDay);
 
 // Prototypes for Expenses
 void AddFlightExpense();
@@ -57,4 +67,4 @@ void AddTaxiFees(int tripLength, double maxPerDay);
 void AddConferenceFee();
 void AddHotelExpense(int tripLength, double maxPerNight);
 void AddMealExpenses(int tripLength);
-void DisplayExpenseReport(int lengthOfTrip);
+void DisplayExpenseReport();
