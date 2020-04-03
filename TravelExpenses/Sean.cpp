@@ -38,7 +38,6 @@ void AddParkingFees(int tripLength, double MAX_PARKING_FEE_PER_DAY)
     for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
     {
         dailyFee = GetExpenseAmount("What was the parking fee for day" + to_string(dayNumber) + "?", 0);
-        //dailyFee = GetExpenseAmount("What was the parking fee for day " << dayNumber << " ?", 0);
         //Take amount and add to expenses.
         AddExpense(dailyFee, MAX_PARKING_FEE_PER_DAY);
     }
@@ -50,7 +49,7 @@ void AddTaxiFees(int tripLength, double MAX_TAXI_FEE_PER_DAY)
     //ask for fee per day, from day 1 to tripLength.
     for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
     {
-        dailyFee = GetExpenseAmount("What was the taxi fee for day " << dayNumber << " ?", 0);
+        dailyFee = GetExpenseAmount("What was the taxi fee for day" + to_string(dayNumber) + "?", 0);
         //Take amount and add to expenses.
         AddExpense(dailyFee, MAX_TAXI_FEE_PER_DAY);
     }
@@ -69,7 +68,7 @@ void AddHotelExpense(int tripLength, double MAX_HOTEL_FEE_PER_NIGHT)
     //ask for fee per day, from day 1 to tripLength.
     for (int dayNumber = 1; dayNumber <= tripLength; dayNumber++)
     {
-        dailyHotel = GetExpenseAmount("What was the taxi fee for day " << dayNumber << " ?", 0);
+        dailyHotel = GetExpenseAmount("What was the hotel fee for day" + to_string(dayNumber) + "?", 0);
         //Take amount and add to expenses.
         AddExpense(dailyHotel, MAX_HOTEL_FEE_PER_NIGHT);
     }
