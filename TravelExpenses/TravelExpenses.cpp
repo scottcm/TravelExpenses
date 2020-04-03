@@ -50,30 +50,39 @@ int main()
     _tripLength = GetLengthOfTrip();
     GetTime("What time did you depart for your destination?", _departureTime);
     GetTime("What time did you arrive back home?", _arrivalTime);
-
     cout << endl;
+
     // Add vehicle expenses
     if (AskYesNo("Did you use a personal vehicle?"))
     {
         AddMileageExpense(MILEAGE_RATE);
+        cout << endl;
     }
     else if (AskYesNo("Did you rent a car?"))
     {
         AddCarRentalExpense();
+        cout << endl;
     }
 
-    cout << endl;
+    // Add parking fees
+    if (AskYesNo("Did you pay any parking fees?"))
+    {
+        AddParkingFees(_tripLength, MAX_PARKING_FEE_PER_DAY);
+        cout << endl;
+    }
+
     //Add taxi expenses
     if (AskYesNo("Did you use a taxi?"))
     {
         AddTaxiFees(_tripLength, MAX_TAXI_FEE_PER_DAY);
+        cout << endl;
     }
 
-    cout << endl;
     // Add flight expense
     if (AskYesNo("Did you take a round trip flight?"))
     {
         AddFlightExpense();
+        cout << endl;
     }
 
     cout << endl;
@@ -83,28 +92,20 @@ int main()
         AddHotelExpense(_tripLength, MAX_HOTEL_FEE_PER_NIGHT);
     }
 
-    cout << endl;
     // Add conference fee
     if (AskYesNo("Was there a conference fee?"))
     {
         AddConferenceFee();
+        cout << endl;
     }
 
-    cout << endl;
-    // Add parking fees
-    if (AskYesNo("Did you pay any parking fees?"))
-    {
-        AddParkingFees(_tripLength, MAX_PARKING_FEE_PER_DAY);
-    }
-
-    cout << endl;
     // Add meal expenses
     if (AskYesNo("Did you pay for any meals?"))
     {
         AddMealExpenses(_tripLength);
+        cout << endl;
     }
 
-    cout << endl;
     DisplayExpenseReport();
 }
 
