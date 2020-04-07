@@ -1,30 +1,49 @@
 #include "TravelExpenses.h"
 #include <iomanip>
 
+// Add expenses for each meal during the trip
 void AddMealExpenses(int tripLength)
 {
     double breakfast_fee;
     double lunch_fee;
     double dinner_fee;
     
-    for (int days = 1; days <= tripLength; days++)
+    cout << "You departed on your trip at " << GetDepartureTime() << " and arrived back at " << GetArrivalTime() << endl;
+    for (int tripDay = 1; tripDay <= tripLength; tripDay++)
     {
-        cout << "Please enter the amount you spent on meals for day " << days << endl;
-        if (AllowMealExpense(BREAKFAST_MEAL, days))
+        cout << "Please enter the amount you spent on meals for day " << tripDay << endl;
+        if (AllowMealExpense(BREAKFAST_MEAL, tripDay))
         {
             breakfast_fee = GetExpenseAmount("How much did you pay for breakfast? ", 0);
             AddExpense(breakfast_fee, MAX_BREAKFAST_COST);
         }
-        if (AllowMealExpense(LUNCH_MEAL, days))
+        else
+        {
+            cout << "You " << ((tripDay == 1) ? "departed too late" : "arrived back too early") << " to expense breakfast on this day.\n";
+        }
+
+        // Lunch
+        if (AllowMealExpense(LUNCH_MEAL, tripDay))
         {
             lunch_fee = GetExpenseAmount("How much did you pay for lunch? ", 0);
             AddExpense(lunch_fee, MAX_LUNCH_COST);
         }
-        if (AllowMealExpense(DINNER_MEAL, days))
+        else
+        {
+            cout << "You " << ((tripDay == 1) ? "departed too late" : "arrived back too early") << " to expense lunch on this day.\n";
+        }
+
+        // Dinner
+        if (AllowMealExpense(DINNER_MEAL, tripDay))
         {
             dinner_fee = GetExpenseAmount("How much did you pay for dinner? ", 0);
             AddExpense(dinner_fee, MAX_DINNER_COST);
         }
+        else
+        {
+            cout << "You " << ((tripDay == 1) ? "departed too late" : "arrived back too early") << " to expense dinner on this day.\n";
+        }
+
         cout << endl;
     }
 }
@@ -32,6 +51,7 @@ void AddMealExpenses(int tripLength)
 //Display Report
 void DisplayExpenseReport()
 {
+    // Display a report header and ensure that dollar amounts have 2 decimals
     cout << setprecision(2) << fixed;
     cout << endl;
     cout << "************************************************\n";
@@ -59,21 +79,9 @@ void DisplayExpenseReport()
         cout << "Try to be more careful about your expense amounts.\n";
     }
 
+    // Inform the user how much they need to pay back to the company
     if (GetExcessExpenses() > 0)
     {
         cout << "You need to reimburse the company $" << GetExcessExpenses();
     }
-}
-
-
-
-void TestNghiaParts()
-{
-    ResetGlobalValues();
-    SetArrivalTime(7, 0);
-    SetDepartureTime(20, 0);
-    AddMealExpenses(3);
-    //GetMealExpense(string meal, int* time);
-    //DisplayExpenseReport();
-    ResetGlobalValues();
 }

@@ -1,5 +1,6 @@
 #include "TravelExpenses.h"
 
+// Add flight expense
 void AddFlightExpense()
 {
     double roundTripFare;
@@ -8,6 +9,8 @@ void AddFlightExpense()
     //Take amount and add to expenses.
     AddExpense(roundTripFare);
 }
+
+// Add car rental expense
 void AddCarRentalExpense()
 {
     double rentalCost;
@@ -16,7 +19,10 @@ void AddCarRentalExpense()
     //Take total amount and add to expenses.
     AddExpense(rentalCost);
 }
-void AddMileageExpense(double MILEAGE_RATE)
+
+// Add mileage expense
+// - mileageRate: The mileage reimbursement rate
+void AddMileageExpense(double mileageRate)
 {
     double milesDriven;
     double mileageCost;
@@ -27,11 +33,15 @@ void AddMileageExpense(double MILEAGE_RATE)
         cin.ignore();
     } while (milesDriven < 0); 
     //Calculate cost with mileageRate.
-    mileageCost = milesDriven * MILEAGE_RATE;
+    mileageCost = milesDriven * mileageRate;
     //Add amount to expenses.
     AddExpense(mileageCost);
 }
-void AddParkingFees(int tripLength, double MAX_PARKING_FEE_PER_DAY)
+
+// Add parking expense
+// - tripLength: Length of the trip in days
+// - maxParkingFee: The maximum per day parking fee
+void AddParkingFees(int tripLength, double maxParkingFee)
 {
     double dailyFee;
     //ask for fee per day, from day 1 to tripLength.
@@ -39,11 +49,15 @@ void AddParkingFees(int tripLength, double MAX_PARKING_FEE_PER_DAY)
     {
         dailyFee = GetExpenseAmount("What was the parking fee for day" + to_string(dayNumber) + "?", 0);
         //Take amount and add to expenses.
-        AddExpense(dailyFee, MAX_PARKING_FEE_PER_DAY);
+        AddExpense(dailyFee, maxParkingFee);
     }
 
 }
-void AddTaxiFees(int tripLength, double MAX_TAXI_FEE_PER_DAY)
+
+// Add taxi expense
+// - tripLength: Length of the trip in days
+// - maxTaxiFee: The maximum per day taxi fee
+void AddTaxiFees(int tripLength, double maxTaxiFee)
 {
     double dailyFee;
     //ask for fee per day, from day 1 to tripLength.
@@ -51,9 +65,11 @@ void AddTaxiFees(int tripLength, double MAX_TAXI_FEE_PER_DAY)
     {
         dailyFee = GetExpenseAmount("What was the taxi fee for day" + to_string(dayNumber) + "?", 0);
         //Take amount and add to expenses.
-        AddExpense(dailyFee, MAX_TAXI_FEE_PER_DAY);
+        AddExpense(dailyFee, maxTaxiFee);
     }
 }
+
+// Add conference expense
 void AddConferenceFee()
 {
     double conferenceCost;
@@ -62,7 +78,11 @@ void AddConferenceFee()
     //Take total amount and add to expenses.
     AddExpense(conferenceCost);
 }
-void AddHotelExpense(int tripLength, double MAX_HOTEL_FEE_PER_NIGHT)
+
+// Add hotel expense
+// - tripLength: Length of the trip in days
+// - maxHotelFee: max per night hotel fee
+void AddHotelExpense(int tripLength, double maxHotelFee)
 {
     double dailyHotel;
     //ask for fee per day, from day 1 to tripLength.
@@ -70,20 +90,7 @@ void AddHotelExpense(int tripLength, double MAX_HOTEL_FEE_PER_NIGHT)
     {
         dailyHotel = GetExpenseAmount("What was the hotel fee for day" + to_string(dayNumber) + "?", 0);
         //Take amount and add to expenses.
-        AddExpense(dailyHotel, MAX_HOTEL_FEE_PER_NIGHT);
+        AddExpense(dailyHotel, maxHotelFee);
     }
    
-}
-
-void TestSeanParts()
-{
-    ResetGlobalValues();
-    //AddFlightExpense();
-    //AddCarRentalExpense();
-    //AddMileageExpense(MILEAGE_RATE);
-    //AddParkingFees(3, MAX_PARKING_FEE_PER_DAY);
-    //AddTaxiFees(3, MAX_TAXI_FEE_PER_DAY);
-    //AddConferenceFee();
-    //AddHotelExpense(3, MAX_HOTEL_FEE_PER_NIGHT);
-    ResetGlobalValues();
 }

@@ -129,7 +129,7 @@ private:
     const int LAST_DAY_LUNCH_CUTOFF = 13;
     const int LAST_DAY_DINNER_CUTOFF = 19;
 
-    int tripLength;
+    int tripLength{ 0 };
     Time arrivalTime;
     Time departureTime;
 

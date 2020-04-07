@@ -1,7 +1,6 @@
 #include "TravelExpenses.h"
 
 // Returns the length of the trip in days
-// Return value must be >= MIN_TRIP_LENGTH
 int GetLengthOfTrip()
 {
     int lengthOfTrip;
@@ -57,6 +56,8 @@ void GetTime(string question, int* time)
 string ToTimeString(int time[], int size)
 {
     string timeString;
+
+    // Ensure the time array is the expected size. Assign a blank string if it's not.
     if (size != TIME_SIZE)
     {
         timeString = "";
@@ -81,14 +82,16 @@ bool AskYesNo(string question)
     bool invalidResponse = true;
     bool isYes;
 
+    // Ask a Y/N question. Repeat the question until the user answers either Y or N
     do
     {
+        // Ask the question and get the user response
         cout << question << "(Y/N): ";
         cin >> response;
 
         cin.ignore(); // Ignore enter at the end;
 
-        // convert the response to uppercase because answer is case-insensitive
+        // convert the response to uppercase because answer is case-insensitive and determine if valid response
         switch (_toupper(response))
         {
         case 'Y':
@@ -102,6 +105,7 @@ bool AskYesNo(string question)
         }
     } while (invalidResponse);
 
+    // Return true if the user answered yes, otherwise false
     return isYes;
 }
 

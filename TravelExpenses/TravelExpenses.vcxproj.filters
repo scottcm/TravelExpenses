@@ -27,7 +27,7 @@
     <ClCompile Include="Sean.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BetterApproach.cpp">
+    <ClCompile Include="ClassApproach.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

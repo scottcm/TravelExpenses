@@ -9,7 +9,7 @@ const int EXPENSE_SIZE = 3;		// Length of the _expenses array
 const int TIME_SIZE = 2;		// Length of time arrays
 const int TOTAL_EXPENSES = 0;   // Index of _expenses for total expenses amount
 const int TOTAL_ALLOWED = 1;    // Index of _expenses for total allowed amount
-const int EXCESS_EXPENSE = 2;		// EXCESS_EXPENSE amount
+const int EXCESS_EXPENSE = 2;	// Excess amount spent
 const int HOURS = 0;            // Index for hour in a time array
 const int MINUTES = 1;          // Index for minute in a time array
 const int MAX_HOUR = 24;
@@ -42,12 +42,9 @@ const int DINNER_MEAL = 2;			// ID for dinner
 void GetTime(string question, int* time);
 bool IsValidHour(int);
 bool IsValidMinute(int);
-void SetArrivalTime(int hour, int minute);
-void SetDepartureTime(int hour, int minute);
 string ToTimeString(int time[], int size);
 
 // Prototypes for Helper functions
-void ResetGlobalValues();
 bool AskYesNo(string question);
 int GetLengthOfTrip();
 double GetExpenseAmount(string question, double minValue);
@@ -57,6 +54,9 @@ double GetTotalExpenses();
 double GetTotalAllowed();
 double GetExcessExpenses();
 bool AllowMealExpense(int meal, int tripDay);
+string GetDepartureTime();
+string GetArrivalTime();
+void AssignTripDetails();
 
 // Prototypes for Expenses
 void AddFlightExpense();

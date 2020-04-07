@@ -2,54 +2,16 @@
 
 #include "TravelExpenses.h"
 
-/************ Pre-processor directives to make testing easier ***************/
-// Change any value to 1 to enable running the test code
-#define TEST_NGHIA_PARTS 0
-#define TEST_SEAN_PARTS 0
-#define DO_NOT_RUN_APP 0
-
-// Prototypes for testing
-#if TEST_NGHIA_PARTS == 1
-void TestNghiaParts();
-#endif // TEST_NGHIA_PARTS == 1
-
-#if TEST_SEAN_PARTS == 1
-void TestSeanParts();
-#endif // TEST_SEAN_PARTS == 1
-
 // Global variables
 int _tripLength;                    // Length of the business trip in days
 int _arrivalTime[TIME_SIZE];        // Arrival time. Index 0 = hours, 1 = minutes. 24-hour clock
 int _departureTime[TIME_SIZE];      // Departure time. Index 0 = hours, 1 = minutes. 24-hour clock
 double _expenses[EXPENSE_SIZE];     // Travel expenses. Index 0 = total, 1 = total allowed
 
-
-// Runs test code
-void RunTestCode()
-{
-#if TEST_NGHIA_PARTS == 1
-    TestNghiaParts();
-#endif // TEST_NGHIA_PARTS == 1
-
-#if TEST_SEAN_PARTS == 1
-    TestSeanParts();
-#endif TEST_SEAN_PARTS == 1
-}
-
-void UseClassApproach();
-
 int main()
 {
-#if DO_NOT_RUN_APP == 1
-    //RunTestCode();
-    UseClassApproach();
-    return 0;
-#endif // DO_NOT_RUN_APP = 1
-
-    // Get global data needed by the rest of the app
-    _tripLength = GetLengthOfTrip();
-    GetTime("What time did you depart for your destination?", _departureTime);
-    GetTime("What time did you arrive back home?", _arrivalTime);
+    // Assign length, departure time, and arrival time for the trip
+    AssignTripDetails();
     cout << endl;
 
     // Add vehicle expenses
@@ -107,6 +69,29 @@ int main()
     }
 
     DisplayExpenseReport();
+}
+
+// Assigns the details for the business trip
+void AssignTripDetails()
+{
+    // Get the length of the trip in days
+    _tripLength = GetLengthOfTrip();
+
+    // Get the departure and arrival times
+    GetTime("What time did you depart for your destination?", _departureTime);
+    GetTime("What time did you arrive back home?", _arrivalTime);
+}
+
+// Returns the arrival time, in 24-hour format, as a string
+string GetArrivalTime()
+{
+    return ToTimeString(_arrivalTime, TIME_SIZE);
+}
+
+// Returns the departure time, in 24-hour format, as a string
+string GetDepartureTime()
+{
+    return ToTimeString(_departureTime, TIME_SIZE);
 }
 
 // Returns the total expenses amount
@@ -208,32 +193,4 @@ bool AllowMealExpense(int meal, int tripDay)
     }
 
     return isAllowed;
-}
-
-// Sets global variables to all zeros
-void ResetGlobalValues()
-{
-    _arrivalTime[HOURS] = 0;
-    _arrivalTime[MINUTES] = 0;
-    _expenses[TOTAL_ALLOWED] = 0;
-    _expenses[TOTAL_EXPENSES] = 0;
-    _expenses[EXCESS_EXPENSE] = 0;
-}
-
-/****************************************************************/
-/******** ALL CODE AFTER THIS POINT IS FOR TESTING ONLY *********/
-/****************************************************************/
-
-// Sets the arrival time
-void SetArrivalTime(int hour, int minute)
-{
-    _arrivalTime[HOURS] = hour;
-    _arrivalTime[MINUTES] = minute;
-}
-
-// Sets the departure time
-void SetDepartureTime(int hour, int minute)
-{
-    _departureTime[HOURS] = hour;
-    _departureTime[MINUTES] = minute;
 }
